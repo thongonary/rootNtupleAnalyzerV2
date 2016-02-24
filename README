@@ -72,26 +72,29 @@ Note2:
   A simple, empty template is provided in src/analysisClass_NoiseTemplate.C
   
 
+
 Examples:
+---------
 
-- To run locally:
+1) To run locally:
 
-    ./main config/inputFile.txt config/cutFile_NoExternalCuts.txt hcalTupleTree/tree /tmp/<username>/<OutputFile> /tmp/<username>/<CutEfficiencyFile>
+     ./main config/inputFile.txt config/cutFile_NoExternalCuts.txt hcalTupleTree/tree /tmp/<username>/<OutputFile> /tmp/<username>/<CutEfficiencyFile>
 
-  where OutputFile is the name of the output root file without the ".root" extension
-  and CutEfficiencyFile is the name of the output cut-efficiency file without the ".txt" extension.
+   where OutputFile is the name of the output root file without the ".root" extension
+   and CutEfficiencyFile is the name of the output cut-efficiency file without the ".txt" extension.
 
-  The inputFile.txt should have the following structure (a line per input file).
-  For local files:
-    file:/full/path/to/file.root
-  And for files on eos:
-    root://eoscms//eos/cms/store/path/to/file.root
+   The inputFile.txt should have the following structure (a line per input file).
+   For local files:
+     file:/full/path/to/file.root
+   And for files on eos:
+     root://eoscms//eos/cms/store/path/to/file.root
   
-- To run on batch:
+2) To run on lxbatch:
 
-  ...
+   ...
+ 
 
-# ---------------------------------------------------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------------------------------------- #
 
 
 More details:
