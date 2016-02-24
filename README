@@ -27,51 +27,40 @@ Instructions:
 -------------
 
 1) Environment setup:
-   scram project CMSSW CMSSW_7_4_14
-   cd CMSSW_7_4_14/src/
-   cmsenv
+     export SCRAM_ARCH=slc6_amd64_gcc493
+     cmsrel CMSSW_7_6_3_patch2
+     cd CMSSW_7_6_3_patch2/src
+     cmsenv
 
 2) Checkout the code:
-   git clone git@github.com:CMSLQ/rootNtupleAnalyzerV2 Leptoquarks/analyzer/rootNtupleAnalyzerV2
-You will probably also want the macros package:
-   git clone git@github.com:CMSLQ/rootNtupleMacrosV2 Leptoquarks/analyzer/rootNtupleMacrosV2
-Here we insert an extra directory so that scram will ignore the source files here 
-(in case you have other CMSSW stuff in that area).
+     git clone git@github.com:dertexaner/rootNtupleAnalyzerV2 
 
 3) Generate the rootNtupleClass:
-   cd rootNtupleAnalyzerV2/
-   ./scripts/make_rootNtupleClass.sh
-      (you will be asked for input arguments)
+     cd rootNtupleAnalyzerV2/
+     ./scripts/make_rootNtupleClass.sh   #(you will be asked for input arguments)
+   Example:				      
+     ./scripts/make_rootNtupleClass.sh  -f /tmp/hsaka/SingleMuon__Run2015D-PromptReco-v3__RECO_91_1_Qq9.root -t hcalTupleTree/tree
 
 4) Copy the analysis template file into your own file:
      cp -i src/analysisClass_template.C src/analysisClass_myCode.C
    and make a symbolic link analysisClass.C by:
      ln -s analysisClass_myCode.C src/analysisClass.C
 
-   NOTE: the macro analysisClass_template.C might not be compatible with the dataformat of your ntuples
-         you have to write a consistent macro.
-
 5) Compile to test that all is OK so far (in order to compile, steps 2 and 3 need to be done first):
-   make clean
-   make
-Note that if you run on full RootTupleMakerV2-produced ntuples, you have to use Makefile_fullNtuple:
-   make -f Makefile_fullNtuple
+     make clean
+     make
 
-6) Add your analysis code to the method Loop() of analysisClass_myCode.C
-
-   NOTE: to access variables use
-   variable->at(i)
-   instead of
-   variable[i]
+6) Add your analysis code to the method Loop() of analysisClass_myCode.C.
+   To access variables, use variable->at(i) instead of variable[i]
 
 7) Compile as in 4.
 
 8) Run:
-   ./main
-      (you will be asked for input arguments)
+   ./main  #(you will be asked for input arguments)
+   
 
 Note1:
-  one can have several analyses in a directory, such as
+  One can have several analyses in a directory, such as
     src/analysisClass_myCode1.C
     src/analysisClass_myCode2.C
     src/analysisClass_myCode3.C
@@ -79,29 +68,34 @@ Note1:
     ln -sf analysisClass_myCode2.C src/analysisClass.C
   and compile/run as above.
 
-Note2:
-  a github area to commit all the analysis macros such as analysisClass_XXX.C
-  has been prepared (as noted above) here:
-    https://github.com/CMSLQ/rootNtupleMacrosV2
-  This will allow separate development of the rootNtupleAnalyzerV2 package
-  from the development of the analysis macros.
-  In order to compile and run an analysis macro
-    /...fullPath.../rootNtupleMacros/src/analysisClass_XXX.C
-  do:
-    ln -sf /...fullPath.../rootNtupleMacrosV2/src/analysisClass_XXX.C src/analysisClass.C
-  and compile/run as above.
+Note2: 
+  A simple, empty template is provided in src/analysisClass_NoiseTemplate.C
+  
+
+Examples:
+
+- To run locally:
+
+    ./main config/inputFile.txt config/cutFile_NoExternalCuts.txt hcalTupleTree/tree /tmp/<username>/<OutputFile> /tmp/<username>/<CutEfficiencyFile>
+
+  where OutputFile is the name of the output root file without the ".root" extension
+  and CutEfficiencyFile is the name of the output cut-efficiency file without the ".txt" extension.
+
+  The inputFile.txt should have the following structure (a line per input file).
+  For local files:
+    file:/full/path/to/file.root
+  And for files on eos:
+    root://eoscms//eos/cms/store/path/to/file.root
+  
+- To run on batch:
+
+  ...
+
+# ---------------------------------------------------------------------------------------------------------------------- #
+
 
 More details:
 -------------
-
-- Example code:
-The src/analysisClass_template.C comes with simple example code. The example code in enclosed by
-  #ifdef USE_EXAMPLE
-    ... code ...
-  #endif //end of USE_EXAMPLE
-The code is NOT compiled by default. In order to compile it, uncomment the line
-  #FLAGS += -DUSE_EXAMPLE
-in the Makefile.
 
 - Providing cuts via file:
 A list of cut variable names and cut limits can be provided through a file (see config/cutFileExample.txt).
