@@ -32,7 +32,7 @@ void analysisClass::Loop()
 
    /////////initialize variables
 
-   Long64_t nentries = fChain->GetEntriesFast();
+   Long64_t nentries = fChain->GetEntries();
    std::cout << "analysisClass::Loop(): nentries = " << nentries << std::endl;   
 
    ////// The following ~7 lines have been taken from rootNtupleClass->Loop() /////
