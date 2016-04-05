@@ -1,0 +1,5 @@
+#!/bin/bash
+cd /afs/cern.ch/work/q/qnguyen/public/HCAL/CMSSW_7_6_3_patch2/src/rootNtupleAnalyzerV2
+cmsenv
+./main /afs/cern.ch/work/q/qnguyen/public/HCAL/CMSSW_7_6_3_patch2/src/rootNtupleAnalyzerV2/data/CosmicsComissioning_20160322_023830/input/input_42.list /afs/cern.ch/work/q/qnguyen/public/HCAL/CMSSW_7_6_3_patch2/src/rootNtupleAnalyzerV2/config/cutFile_NoExternalCuts.txt hcalTupleTree/tree /afs/cern.ch/work/q/qnguyen/public/HCAL/CMSSW_7_6_3_patch2/src/rootNtupleAnalyzerV2/data/CosmicsComissioning_20160322_023830/output/CosmicsComissioning_20160322_023830_42 /afs/cern.ch/work/q/qnguyen/public/HCAL/CMSSW_7_6_3_patch2/src/rootNtupleAnalyzerV2/data/CosmicsComissioning_20160322_023830/output/CosmicsComissioning_20160322_023830_42
+mv -v /afs/cern.ch/work/q/qnguyen/public/HCAL/CMSSW_7_6_3_patch2/src/rootNtupleAnalyzerV2/data/CosmicsComissioning_20160322_023830/output/CosmicsComissioning_20160322_023830_42_skim.root /afs/cern.ch/work/q/qnguyen/public/HCAL/CMSSW_7_6_3_patch2/src/rootNtupleAnalyzerV2/data/CosmicsComissioning_20160322_023830/skim/CosmicsComissioning_20160322_023830_42.root
